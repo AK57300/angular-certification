@@ -19,8 +19,19 @@ export class ListViewComponent implements OnInit {
   ngOnInit() {
     //console.log('ok');
     this.stockService.stock.subscribe();
-    //this.stockSymbolService.getDetails('AAPL');
+    this.stockSymbolService.getDetails('AAPL');
     this.stockSymbolService.newStock.subscribe();
+
+    this.stocks = this.stockService.stock
+      .asObservable()
+      .pipe(
+        map((symbols) =>
+          symbols.map((symbol) => this.stockSymbolService.getDetails(symbol))
+        )
+      );
+    //.subscribe((data) => console.log(data));
+
+    console.log(this.stocks);
 
     /*this.stocks = this.stockService.stock.asObservable().pipe(
       map((symbol) => {
