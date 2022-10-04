@@ -10,15 +10,19 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./list-view.component.css'],
 })
 export class ListViewComponent implements OnInit {
-  //stocks: Subscription;
-  constructor(public readonly stockService: StockService) {}
+  stocks: Subscription;
+  constructor(
+    public readonly stockService: StockService,
+    private readonly stockSymbolService: StockSymbolService
+  ) {}
 
   ngOnInit() {
+    console.log('ok');
     this.stockService.stock.subscribe();
-    /*this.stocks = this.stockService.stock.asObservable().subscribe((stock) => {
+    this.stocks = this.stockService.stock.asObservable().subscribe((stock) => {
       stock.map((symbol) => {
         console.log(symbol);
-        forkJoin([
+        /*forkJoin([
           this.stockSymbolService.getQuote(symbol).subscribe((quote) => {
             console.log(quote);
           }),
@@ -27,10 +31,10 @@ export class ListViewComponent implements OnInit {
           }),
         ]).subscribe(() => {
           console.log('fini');
-        });
+        });*/
       });
       console.log(stock);
-    });*/
+    });
 
     /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
       this.changeTodayValue = quote.c;
