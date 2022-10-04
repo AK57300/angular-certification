@@ -1,0 +1,9 @@
+.card {
+  border: 1px black solid;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}

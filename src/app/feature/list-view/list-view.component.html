@@ -1,0 +1,7 @@
+<!--<div *ngFor="let stock of stocks$ | async">
+  <app-card-view [symbol]="stock"></app-card-view>
+</div>-->
+
+<div *ngIf="stockService.stock | async as stocks">
+  {{ stocks }}
+</div>
