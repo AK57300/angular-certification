@@ -8,11 +8,11 @@ import { StockSymbolService } from '../../core/services/stock-symbol.service';
 })
 export class CardViewComponent implements OnInit {
   @Input() symbol;
-  name: string;
-  changeTodayValue: number;
-  openingPrice: number;
-  currentPrice: number;
-  highPrice: number;
+  name: string = 'Alex';
+  changeTodayValue: number = 0;
+  openingPrice: number = 0;
+  currentPrice: number = 0;
+  highPrice: number = 0;
 
   constructor(private readonly stockSymbolService: StockSymbolService) {}
 
