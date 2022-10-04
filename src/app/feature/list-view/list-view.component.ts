@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, forkJoin, of, Subscription } from 'rxjs';
+import { BehaviorSubject, forkJoin, map, of, Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { StockSymbolService } from '../../core/services/stock-symbol.service';
 import { StockService } from '../../core/services/stock.service';
@@ -10,7 +10,7 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./list-view.component.css'],
 })
 export class ListViewComponent implements OnInit {
-  stocks: Subscription;
+  stocks: Observable<any>;
   constructor(
     public readonly stockService: StockService,
     public readonly stockSymbolService: StockSymbolService
@@ -19,17 +19,20 @@ export class ListViewComponent implements OnInit {
   ngOnInit() {
     //console.log('ok');
     this.stockService.stock.subscribe();
-    this.stockSymbolService.getDetails('AAPL');
+    //this.stockSymbolService.getDetails('AAPL');
     this.stockSymbolService.newStock.subscribe();
 
-    /*this.stocks = this.stockService.stock.asObservable().subscribe((stock) => {
-      stock.map((symbol) => {
-        console.log(symbol);
-        this.stockSymbolService.getDetails(symbol);
-        console.log(this.stockSymbolService.newStock.getValue());
-      });
-      //console.log(stock);
-    });*/
+    /*this.stocks = this.stockService.stock.asObservable().pipe(
+      map((symbol) => {
+        symbol.map((sym) => console.log(sym));
+        //console.log(symbol);
+        //this.stockSymbolService.getDetails(symbol);
+        //console.log(this.stockSymbolService.newStock.getValue());
+      })
+    );*/
+    //console.log(stock);
+
+    // console.log(this.stocks);
 
     /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
       this.changeTodayValue = quote.c;
@@ -41,5 +44,9 @@ export class ListViewComponent implements OnInit {
     this.stockSymbolService.getSymbol(this.symbol).subscribe((quote) => {
       this.name = quote.result[0].description;
     });*/
+  }
+
+  getDetails(symbol: string) {
+    return this.stockSymbolService.getDetails(symbol);
   }
 }

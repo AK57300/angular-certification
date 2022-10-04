@@ -19,6 +19,7 @@ export class CardViewComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.symbol);
+    this.name = this.symbol;
     /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
       this.changeTodayValue = quote.c;
       this.openingPrice = quote.o;

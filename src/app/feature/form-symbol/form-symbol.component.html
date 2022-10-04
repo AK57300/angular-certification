@@ -1,8 +1,18 @@
-<form class="border-form" [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+<form class="card" [formGroup]="stockForm" (ngSubmit)="onSubmit()">
   Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)
-  <div>
-    <input type="text" id="stockInput" formControlName="symbolStock" />
-    <button type="submit" id="trackBtn" [disabled]="!stockForm.valid">
+  <div class="input-group mb-3 d-flex justify-content-start">
+    <input
+      type="text"
+      id="stockInput"
+      class="form-control"
+      formControlName="symbolStock"
+    />
+    <button
+      type="submit"
+      class="btn btn-primary"
+      id="trackBtn"
+      [disabled]="!stockForm.valid"
+    >
       Track Stock
     </button>
   </div>

@@ -1,17 +1,12 @@
-.card {
-  border: 1px black solid;
-  text-align: center;
-}
-
 .container {
   display: flex;
   justify-content: space-evenly;
 }
 
-.arrowUp {
+.arrowUp::after {
   content: '\2191';
 }
 
-.arrowDown {
+.arrowDown::after {
   content: '\2193';
 }

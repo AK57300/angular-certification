@@ -1,17 +1,37 @@
 <div class="card">
-  {{ name }}
-  <div class="container">
-    <div>Change today: {{ changeTodayValue }}</div>
-    <div>Opening price: {{ openingPrice }}</div>
+  <div class="card-body">
+    <div class="d-flex justify-content-end">
+      <button
+        type="button"
+        (click)="deleteStock(symbol)"
+        id="remove{{ symbol }}"
+        class="btn btn-danger"
+      >
+        X
+      </button>
+    </div>
+
+    <div class="d-flex justify-content-center">{{ name }}</div>
+    <div class="container">
+      <div>Change today: {{ changeTodayValue }}</div>
+      <div>Opening price: {{ openingPrice }}</div>
+    </div>
+    <div class="container">
+      <div>Current price: {{ currentPrice }}</div>
+      <div>High price: {{ highPrice }}</div>
+    </div>
+    <!--<img [src]="changeTodayValue > 1 ? :">-->
+    <div
+      class="d-flex justify-content-center"
+      [ngClass]="changeTodayValue > 0 ? 'arrowUp' : 'arrowDown'"
+    ></div>
+    <button
+      type="button"
+      (click)="clickBtn()"
+      id="sentiment{{ symbol }}"
+      class="btn btn-light"
+    >
+      Go to social sentiment details >
+    </button>
   </div>
-  <div class="container">
-    <div>Current price: {{ currentPrice }}</div>
-    <div>High price: {{ highPrice }}</div>
-  </div>
-  <!--<img [src]="changeTodayValue > 1 ? :">-->
-  <div [ngClass]="changeTodayValue > 1 ? arrowUp : arrowDown"></div>
-  <button (click)="clickBtn()" id="sentiment{{ symbol }}">
-    Go to social sentiment details >
-  </button>
-  <button (click)="deleteStock(symbol)" id="remove{{ symbol }}">X</button>
 </div>

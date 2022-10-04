@@ -4,7 +4,6 @@
 
 <div>
   <ng-container *ngFor="let stock of stockService.stock | async as stocks">
-    {{ stock }}
     <app-card-view [symbol]="stock"></app-card-view>
   </ng-container>
 </div>
