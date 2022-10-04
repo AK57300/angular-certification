@@ -13,28 +13,23 @@ export class ListViewComponent implements OnInit {
   stocks: Subscription;
   constructor(
     public readonly stockService: StockService,
-    private readonly stockSymbolService: StockSymbolService
+    public readonly stockSymbolService: StockSymbolService
   ) {}
 
   ngOnInit() {
-    console.log('ok');
+    //console.log('ok');
     this.stockService.stock.subscribe();
-    this.stocks = this.stockService.stock.asObservable().subscribe((stock) => {
+    this.stockSymbolService.getDetails('AAPL');
+    this.stockSymbolService.newStock.subscribe();
+
+    /*this.stocks = this.stockService.stock.asObservable().subscribe((stock) => {
       stock.map((symbol) => {
         console.log(symbol);
-        /*forkJoin([
-          this.stockSymbolService.getQuote(symbol).subscribe((quote) => {
-            console.log(quote);
-          }),
-          this.stockSymbolService.getSymbol(symbol).subscribe((sym) => {
-            console.log(sym);
-          }),
-        ]).subscribe(() => {
-          console.log('fini');
-        });*/
+        this.stockSymbolService.getDetails(symbol);
+        console.log(this.stockSymbolService.newStock.getValue());
       });
-      console.log(stock);
-    });
+      //console.log(stock);
+    });*/
 
     /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
       this.changeTodayValue = quote.c;

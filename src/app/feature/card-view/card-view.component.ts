@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StockSymbolService } from '../../core/services/stock-symbol.service';
+import { StockService } from '../../core/services/stock.service';
 
 @Component({
   selector: 'app-card-view',
@@ -14,7 +15,7 @@ export class CardViewComponent implements OnInit {
   currentPrice: number = 0;
   highPrice: number = 0;
 
-  constructor(private readonly stockSymbolService: StockSymbolService) {}
+  constructor(private readonly stockService: StockService) {}
 
   ngOnInit() {
     /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
@@ -31,5 +32,10 @@ export class CardViewComponent implements OnInit {
 
   clickBtn() {
     console.log(this.name);
+  }
+
+  deleteStock(id: string) {
+    console.log(id);
+    console.log(this.stockService.stock.getValue());
   }
 }

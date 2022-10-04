@@ -1,6 +1,12 @@
+<div *ngIf="stockSymbolService.newStock | async as symb; else loading">
+  ok: {{ symb.name }}
+</div>
+
 <div>
   <ng-container *ngFor="let stock of stockService.stock | async as stocks">
-    <app-card-view [symbol]="stock"></app-card-view>
     {{ stock }}
+    <app-card-view [symbol]="stock"></app-card-view>
   </ng-container>
 </div>
+
+<ng-template #loading>Chargement</ng-template>
