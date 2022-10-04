@@ -7,3 +7,11 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+.arrowUp {
+  content: '\2191';
+}
+
+.arrowDown {
+  content: '\2193';
+}

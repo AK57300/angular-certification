@@ -18,6 +18,7 @@ export class CardViewComponent implements OnInit {
   constructor(private readonly stockService: StockService) {}
 
   ngOnInit() {
+    console.log(this.symbol);
     /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
       this.changeTodayValue = quote.c;
       this.openingPrice = quote.o;
@@ -35,7 +36,6 @@ export class CardViewComponent implements OnInit {
   }
 
   deleteStock(id: string) {
-    console.log(id);
-    console.log(this.stockService.stock.getValue());
+    this.stockService.deleteStock(id);
   }
 }

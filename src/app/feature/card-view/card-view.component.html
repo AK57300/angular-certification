@@ -8,6 +8,8 @@
     <div>Current price: {{ currentPrice }}</div>
     <div>High price: {{ highPrice }}</div>
   </div>
+  <!--<img [src]="changeTodayValue > 1 ? :">-->
+  <div [ngClass]="changeTodayValue > 1 ? arrowUp : arrowDown"></div>
   <button (click)="clickBtn()" id="sentiment{{ symbol }}">
     Go to social sentiment details >
   </button>
