@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 export interface IStock {
-  symbol: string,
+  symbol: string;
   name: string;
   changeToday: string;
   openingPrice: string;
@@ -28,6 +28,6 @@ export class StockService {
       JSON.stringify(this.stock.getValue().filter((elem) => elem !== id))
     );
     this.stock.next(this.stock.getValue().filter((elem) => elem !== id));
-    console.log(this.stock.getValue());
+    // console.log(this.stock.getValue());
   }
 }

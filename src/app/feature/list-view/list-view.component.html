@@ -14,11 +14,6 @@
   </ng-container>
 </div>
 
-<div class="d-flex justify-content-around flex-wrap">
-<ng-container *ngFor="let stock of stocks">
-  <div>{{stock}}</div>
-</ng-container>
-</div>
-
+<div>{{ stocks | async }}</div>
 
 <ng-template #loading>Chargement</ng-template>

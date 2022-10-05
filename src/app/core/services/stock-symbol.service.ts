@@ -59,7 +59,7 @@ export class StockSymbolService {
         highPrice: data.resultOne.h,
       });
 
-      console.log(this.newStock.getValue());
+      //console.log(this.newStock.getValue());
     });
   }
 }

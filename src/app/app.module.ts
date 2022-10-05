@@ -12,6 +12,8 @@ import { CardViewComponent } from './feature/card-view/card-view.component';
 import { StockService } from './core/services/stock.service';
 import { AppRoutingModule } from './app-routing.module';
 import { GlobalViewComponent } from './feature/global-view/global-view.component';
+import { StockDetailsService } from './core/services/stock-details.service';
+import { DetailViewComponent } from './feature/detail-view/detail-view.component';
 
 @NgModule({
   imports: [
@@ -27,8 +29,14 @@ import { GlobalViewComponent } from './feature/global-view/global-view.component
     ListViewComponent,
     CardViewComponent,
     GlobalViewComponent,
+    DetailViewComponent,
   ],
-  providers: [StockSymbolService, ApiService, StockService],
+  providers: [
+    StockSymbolService,
+    ApiService,
+    StockService,
+    StockDetailsService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
