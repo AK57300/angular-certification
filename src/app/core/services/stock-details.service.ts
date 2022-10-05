@@ -1,18 +1,37 @@
 import { Injectable } from '@angular/core';
-import { find, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ApiService } from '../data-services/api.service';
-import { IStock } from './stock.service';
 
 @Injectable()
 export class StockDetailsService {
   configUrl = 'https://finnhub.io/api/v1/';
   token = '&token=bu4f8kn48v6uehqi3cqg';
 
-  constructor(private readonly apiService: ApiService) {}
+  dateToday = new Date();
+  dateDebut = new Date();
+  constructor(private readonly apiService: ApiService) {
+    this.dateDebut.setMonth(this.dateToday.getMonth() - 3);
+  }
 
   getNameStock(symbol: string): Observable<string> {
     return this.apiService.get(
       this.configUrl + 'search?q=' + symbol + this.token
+    );
+  }
+
+  getStockDetails(symbol: string, dateDebut: string, dateToday: string) {
+    console.log(dateDebut);
+    console.log(dateToday);
+
+    return this.apiService.get(
+      this.configUrl +
+        '/stock/insider-sentiment?symbol=' +
+        symbol +
+        '&from=' +
+        dateDebut +
+        '&to=' +
+        dateToday +
+        this.token
     );
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../data-services/api.service';
 import { StockService } from './stock.service';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin, of } from 'rxjs';
 
 export interface IStock {
   symbol: string;
@@ -45,8 +45,9 @@ export class StockSymbolService {
 
   getDetails(symbol: string) {
     return forkJoin({
+      symbol: of(symbol),
       resultOne: this.getQuote(symbol),
       resultTwo: this.getSymbol(symbol),
-    })
+    });
   }
 }

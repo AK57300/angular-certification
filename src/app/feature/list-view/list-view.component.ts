@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { map, switchMap } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { map, shareReplay, switchMap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   IStock,
@@ -20,26 +20,12 @@ export class ListViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.stockService.stock.subscribe();
-    this.stockSymbolService.newStock.subscribe();
-    //this.stockSymbolService.getDetails('AAPL');
-
-    this.stocks$ = this.stockService.stock.asObservable().pipe();
-
-    this.stockService.stock
+    this.stocks$ = this.stockService.stock
       .asObservable()
       .pipe(
-        switchMap((symbols) =>
+        map((symbols) =>
           symbols.map((symbol) => this.stockSymbolService.getDetails(symbol))
         )
-      )
-      .subscribe();
-
-    /*this.stockSymbolService.newStock.subscribe((value) => {
-      this.stocks = [...this.stocks, value];
-    });*/
-    //console.log(this.stocks.subscribe((data) => console.log(data)));
-
-    //this.stocks.subscribe((data) => console.log(data));
+      );
   }
 }

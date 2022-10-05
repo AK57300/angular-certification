@@ -7,21 +7,29 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./card-view.component.css'],
 })
 export class CardViewComponent implements OnInit {
-  @Input() symbol;
-  name: string = 'Alex';
-  changeTodayValue: number = 0;
-  openingPrice: number = 0;
-  currentPrice: number = 0;
-  highPrice: number = 0;
+  @Input() stock;
+  symbol: string;
+  name: string;
+  changeTodayValue: number;
+  openingPrice: number;
+  currentPrice: number;
+  highPrice: number;
 
   constructor(private readonly stockService: StockService) {}
 
   ngOnInit() {
-    //console.log(this.symbol);
-    //this.name = this.symbol;
+    this.symbol = this.stock.symbol;
+    this.name = this.stock.resultTwo.result.find(
+      (data) => data.symbol === this.symbol
+    ).description;
+    this.changeTodayValue = this.stock.resultOne.dp;
+    this.openingPrice = this.stock.resultOne.o;
+    this.currentPrice = this.stock.resultOne.c;
+    this.highPrice = this.stock.resultOne.h;
   }
 
   deleteStock(id: string) {
+    console.log(id);
     this.stockService.deleteStock(id);
   }
 }

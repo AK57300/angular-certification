@@ -31,6 +31,12 @@ export class DetailViewComponent implements OnInit {
       { date: 'Juin 2022', change: -1025, mspr: 221 },
       { date: 'Juillet 2022', change: 1028, mspr: 211 },
     ];
+
+    this.stockDetailsService
+      .getStockDetails(this.symbol, '2022-01-01', '2022-03-01')
+      .subscribe(console.log);
+
+    //this.stockDetailsService.getStockDetails();
     //this.name.next(this.getName(this.symbol));
     //this.getName(this.symbol);
   }

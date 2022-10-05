@@ -15,7 +15,7 @@ export interface IStock {
 @Injectable()
 export class StockService {
   stock: BehaviorSubject<string[]> = new BehaviorSubject(
-    JSON.parse(localStorage.getItem('symbol'))
+    JSON.parse(localStorage.getItem('symbol')) || []
   );
 
   deleteStock(id: string) {
