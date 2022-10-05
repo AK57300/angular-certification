@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { StockSymbolService } from '../../core/services/stock-symbol.service';
-import { StockService } from '../../core/services/stock.service';
+import { IStock, StockService } from '../../core/services/stock.service';
 
 @Component({
   selector: 'app-list-view',
@@ -9,7 +10,8 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./list-view.component.css'],
 })
 export class ListViewComponent implements OnInit {
-  stocks: Observable<any>;
+  stockss: Observable<any>;
+  stocks: IStock[] = [];
   constructor(
     public readonly stockService: StockService,
     public readonly stockSymbolService: StockSymbolService
@@ -17,19 +19,20 @@ export class ListViewComponent implements OnInit {
 
   ngOnInit() {
     this.stockService.stock.subscribe();
-    this.stockSymbolService.getDetails('AAPL');
-    this.stockSymbolService.newStock.subscribe();
+    //this.stockSymbolService.getDetails('AAPL');
 
-    /*this.stocks = this.stockService.stock.asObservable().pipe(
-      map((symbols) =>
-        symbols.map(
-          (symbol) => console.log(symbol)
-          //this.stockSymbolService.getDetails(symbol)
-          //this.stockSymbolService.getDetails(symbol);
+    this.stockss = this.stockService.stock
+      .asObservable()
+      .pipe(
+        map((symbols) =>
+          symbols.map((symbol) => this.stockSymbolService.getDetails(symbol))
         )
-      )
-    );*/
+      );
 
+    this.stockSymbolService.newStock.subscribe((value) => {
+      this.stocks = [...this.stocks, value];
+    });
+    //this.stocks.subscribe((data) => console.log(data));
     //console.log(this.stocks.subscribe((data) => console.log(data)));
   }
 
