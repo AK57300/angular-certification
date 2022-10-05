@@ -2,10 +2,12 @@
   <ng-container *ngFor="let stock of listStocks">
     <app-card-view
       (deleteEventEmitter)="deleteEvent($event)"
-      *ngIf="stock.details | async as stockDetails"
+      *ngIf="stock.details | async as stockDetails; else loading"
       [stock]="stockDetails"
     ></app-card-view>
   </ng-container>
 </div>
 
-<ng-template #loading>Chargement</ng-template>
+<ng-template #loading>
+  <div class="lds-dual-ring"></div>
+</ng-template>

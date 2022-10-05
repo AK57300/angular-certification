@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { ApiService } from '../data-services/api.service';
 
 @Injectable()
@@ -14,9 +14,14 @@ export class StockDetailsService {
   }
 
   getNameStock(symbol: string): Observable<string> {
-    return this.apiService.get(
-      this.configUrl + 'search?q=' + symbol + this.token
-    );
+    return this.apiService
+      .get(this.configUrl + 'search?q=' + symbol + this.token)
+      .pipe(
+        filter((data) => {
+          console.log(data.result);
+          return true;
+        })
+      );
   }
 
   getStockDetails(symbol: string, dateDebut: string, dateToday: string) {

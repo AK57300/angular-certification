@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { StockDetailsService } from '../../core/services/stock-details.service';
 
 export interface StockDetail {
-  date: string;
+  symbol: string;
+  year: number;
+  month: number;
   change: number;
   mspr: number;
 }
@@ -15,7 +17,7 @@ export interface StockDetail {
   styleUrls: ['./detail-view.component.css'],
 })
 export class DetailViewComponent implements OnInit {
-  //name: BehaviorSubject<string>;
+  name: string;
   symbol: string;
   stocks: StockDetail[];
 
@@ -26,14 +28,15 @@ export class DetailViewComponent implements OnInit {
 
   ngOnInit() {
     this.symbol = this.route.snapshot.params.symbol;
+    this.getName(this.symbol).subscribe();
     this.stocks = [
-      { date: 'Mai 2022', change: 1023, mspr: 201 },
-      { date: 'Juin 2022', change: -1025, mspr: 221 },
-      { date: 'Juillet 2022', change: 1028, mspr: 211 },
+      { symbol: 'AAPL', year: 2022, month: 3, change: 1023, mspr: 201 },
+      { symbol: 'AAPL', year: 2022, month: 4, change: -1025, mspr: 221 },
+      { symbol: 'AAPL', year: 2022, month: 5, change: 1028, mspr: 211 },
     ];
 
     this.stockDetailsService
-      .getStockDetails(this.symbol, '2022-01-01', '2022-03-01')
+      .getStockDetails(this.symbol, '2015-01-01', '2022-03-01')
       .subscribe(console.log);
 
     //this.stockDetailsService.getStockDetails();
@@ -41,11 +44,7 @@ export class DetailViewComponent implements OnInit {
     //this.getName(this.symbol);
   }
 
-  getName(symbol: string) {
-    let name: string;
-    this.stockDetailsService
-      .getNameStock(symbol)
-      .subscribe((name) => console.log(name));
-    return name;
+  getName(symbol: string): Observable<string> {
+    return this.stockDetailsService.getNameStock(symbol);
   }
 }

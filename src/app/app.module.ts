@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { GlobalViewComponent } from './feature/global-view/global-view.component';
 import { StockDetailsService } from './core/services/stock-details.service';
 import { DetailViewComponent } from './feature/detail-view/detail-view.component';
+import { ConvertMonthPipe } from './feature/pipe/convert-month.pipe';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { DetailViewComponent } from './feature/detail-view/detail-view.component
     CardViewComponent,
     GlobalViewComponent,
     DetailViewComponent,
+    ConvertMonthPipe,
   ],
   providers: [ApiService, StockService, StockDetailsService],
   bootstrap: [AppComponent],
