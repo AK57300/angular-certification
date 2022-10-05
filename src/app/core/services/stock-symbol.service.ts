@@ -28,7 +28,7 @@ export class StockSymbolService {
     let tab: string[] = this.stockService.stock.getValue() || [];
     tab.push(formValue['symbolStock']);
     localStorage.setItem('symbol', JSON.stringify(tab));
-    this.stockService.stock.next(tab);
+    this.stockService.stock.next(formValue['symbolStock']);
   }
 
   getQuote(symbol: string) {

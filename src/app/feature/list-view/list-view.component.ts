@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { map, shareReplay, switchMap } from 'rxjs';
+import { forkJoin, map, merge, of, shareReplay, switchMap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   IStock,
@@ -20,12 +20,16 @@ export class ListViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.stocks$ = this.stockService.stock
-      .asObservable()
-      .pipe(
-        map((symbols) =>
-          symbols.map((symbol) => this.stockSymbolService.getDetails(symbol))
-        )
-      );
+    let previousCardList = [];
+    const getStockFromLocalStorage = of(JSON.parse(localStorage.getItem('symbol')) || []);
+    
+
+    this.stocks$ = merge(getStockFromLocalStorage).pipe(map((symbol : string | string[]) => {
+      if(Array.isArray(symbol)){
+        previousCardList = symbol.map(symbol => this.stockSymbolService.getDetails(symbol));
+        return previousCardList;
+      }
+
+    }));
   }
 }
