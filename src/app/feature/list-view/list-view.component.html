@@ -1,8 +1,7 @@
 <div
   class="d-flex justify-content-around flex-wrap"
-  *ngIf="stocks$ | async as stocks"
 >
-  <ng-container *ngFor="let stock of stocks">
+  <ng-container *ngFor="let stock of stocks$ | async">
     <app-card-view
       *ngIf="stock | async as stockDetails"
       [stock]="stockDetails"
