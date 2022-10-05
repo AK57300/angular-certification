@@ -58,6 +58,9 @@ export class StockService {
   }
 
   deleteStock(id: string) {
-    
+    let tab: string[];
+    tab = JSON.parse(localStorage.getItem('symbol'));
+    tab = tab.filter((index) => index !== id);
+    localStorage.setItem('symbol', JSON.stringify(tab));
   }
 }

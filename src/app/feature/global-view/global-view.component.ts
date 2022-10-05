@@ -62,7 +62,6 @@ export class GlobalViewComponent implements OnInit {
   }
 
   delete(event: string) {
-    console.log(event);
     this.stockService.stock.next({ data: event, type: 'delete' });
   }
 }
