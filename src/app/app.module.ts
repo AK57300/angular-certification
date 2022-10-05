@@ -14,6 +14,7 @@ import { GlobalViewComponent } from './feature/global-view/global-view.component
 import { StockDetailsService } from './core/services/stock-details.service';
 import { DetailViewComponent } from './feature/detail-view/detail-view.component';
 import { ConvertMonthPipe } from './feature/pipe/convert-month.pipe';
+import { PlusBeforeNumberPipe } from './feature/pipe/plus-before-number.pipe';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ConvertMonthPipe } from './feature/pipe/convert-month.pipe';
     GlobalViewComponent,
     DetailViewComponent,
     ConvertMonthPipe,
+    PlusBeforeNumberPipe,
   ],
   providers: [ApiService, StockService, StockDetailsService],
   bootstrap: [AppComponent],
