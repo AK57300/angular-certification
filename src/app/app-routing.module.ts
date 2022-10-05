@@ -6,7 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { GlobalViewComponent } from './feature/global-view/global-view.component';
 
 const routes: Routes = [
-  { path: '', component: GlobalViewComponent },
+  { path: '', redirectTo: '/list', pathMatch: 'full' },
+  { path: 'list', component: GlobalViewComponent },
   {
     path: 'sentiment/:symbol',
     component: DetailViewComponent,

@@ -13,7 +13,7 @@
 
     <div class="d-flex justify-content-center">{{ name }} ({{ symbol }})</div>
     <div class="container">
-      <div>Change today: {{ changeTodayValue }}%</div>
+      <div>Change today: {{ changeTodayValue | plusBeforeNumber }}%</div>
       <div>Opening price: {{ openingPrice | currency: 'USD' }}</div>
     </div>
     <div class="container">

@@ -20,7 +20,6 @@ enum MONTH {
 })
 export class ConvertMonthPipe implements PipeTransform {
   transform(month: number): string {
-    console.log(MONTH[month]);
     return MONTH[month];
   }
 }

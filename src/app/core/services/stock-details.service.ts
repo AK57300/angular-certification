@@ -14,14 +14,15 @@ export class StockDetailsService {
   }
 
   getNameStock(symbol: string): Observable<string> {
-    return this.apiService
-      .get(this.configUrl + 'search?q=' + symbol + this.token)
-      .pipe(
+    return this.apiService.get(
+      this.configUrl + 'search?q=' + symbol + this.token
+    );
+    /*.pipe(
         filter((data) => {
           console.log(data.result);
           return true;
         })
-      );
+      )*/
   }
 
   getStockDetails(symbol: string, dateDebut: string, dateToday: string) {

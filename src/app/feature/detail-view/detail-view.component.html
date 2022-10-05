@@ -6,9 +6,11 @@
     <div *ngFor="let stock of stocks">
       <div>{{ stock.month | convertMonth }} {{ stock.year }}</div>
       <div [ngClass]="stock.change >= 0 ? 'arrowUp' : 'arrowDown'"></div>
-      <div>{{ stock.change }}</div>
+      <div>{{ stock.change | plusBeforeNumber }}</div>
       <div>{{ stock.mspr }}</div>
     </div>
   </div>
-  <button type="button" routerLink=".." class="btn btn-light">Back</button>
+  <button type="button" routerLink="../../list" class="btn btn-light">
+    Back
+  </button>
 </div>
