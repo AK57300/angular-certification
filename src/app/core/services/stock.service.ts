@@ -1,6 +1,6 @@
 import { $locationShim } from '@angular/common/upgrade';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of, forkJoin, Subject } from 'rxjs';
+import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ApiService } from '../data-services/api.service';
 
@@ -16,6 +16,35 @@ export interface IStock {
 export interface IAction {
   data: string;
   type: string;
+}
+
+export interface IQuote {
+  c: number;
+  d: number;
+  dp: number;
+  h: number;
+  l: number;
+  o: number;
+  pc: number;
+  t: number;
+}
+
+export interface ISymbole {
+  description: string;
+  displaySymbol: string;
+  symbol: string;
+  type: string;
+}
+
+export interface ISymboles {
+  count: number;
+  result: ISymbole[];
+}
+
+export interface IDetails {
+  symbol: string;
+  resultOne: IQuote;
+  resultTwo: ISymboles;
 }
 
 @Injectable()
@@ -37,19 +66,19 @@ export class StockService {
     //this.stock.next({ data: formValue['symbolStock'], type: '' });
   }
 
-  getQuote(symbol: string) {
+  getQuote(symbol: string): Observable<IQuote> {
     return this.apiService.get(
       this.configUrl + 'quote?symbol=' + symbol + this.token
     );
   }
 
-  getSymbol(symbol: string) {
+  getSymbol(symbol: string): Observable<ISymboles> {
     return this.apiService.get(
       this.configUrl + 'search?q=' + symbol + this.token
     );
   }
 
-  getDetails(symbol: string) {
+  getDetails(symbol: string): Observable<IDetails> {
     return forkJoin({
       symbol: of(symbol),
       resultOne: this.getQuote(symbol),
@@ -57,7 +86,7 @@ export class StockService {
     });
   }
 
-  deleteStock(id: string) {
+  deleteStock(id: string): void {
     let tab: string[];
     tab = JSON.parse(localStorage.getItem('symbol'));
     tab = tab.filter((index) => index !== id);

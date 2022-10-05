@@ -22,7 +22,7 @@ export class FormSymbolComponent implements OnInit {
     this.initialiseForm();
   }
 
-  initialiseForm() {
+  initialiseForm() : void {
     this.stockForm = this.formBuilder.group({
       symbolStock: [
         '',
@@ -31,7 +31,7 @@ export class FormSymbolComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit() : void {
     const formValue = this.stockForm.value;
     this.stockService.sendSymbolToLocalStorage(formValue);
     this.addEventEmitter.emit(formValue['symbolStock']);

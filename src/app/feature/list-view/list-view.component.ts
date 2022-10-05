@@ -6,9 +6,7 @@ import {
   OnInit,
 Output,
 } from '@angular/core';
-import { filter, forkJoin, map, merge, of, shareReplay, switchMap } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
-import { StockService } from '../../core/services/stock.service';
+import { IListStock } from '../global-view/global-view.component';
 
 @Component({
   selector: 'app-list-view',
@@ -16,7 +14,7 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./list-view.component.css'],
 })
 export class ListViewComponent implements OnInit {
-  @Input() listStocks;
+  @Input() listStocks: IListStock[];
   @Output() deleteEventEmitter = new EventEmitter<string>;
 
   constructor() {}
