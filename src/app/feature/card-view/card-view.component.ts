@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StockService } from '../../core/services/stock.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { StockService } from '../../core/services/stock.service';
 })
 export class CardViewComponent implements OnInit {
   @Input() stock;
+  @Output() deleteEventEmitter = new EventEmitter<string>;
+
   symbol: string;
   name: string;
   changeTodayValue: number;
@@ -29,7 +31,8 @@ export class CardViewComponent implements OnInit {
   }
 
   deleteStock(id: string) {
-    console.log(id);
     this.stockService.deleteStock(id);
+    this.deleteEventEmitter.emit(id);
+    //event emitter du subject avec delete
   }
 }

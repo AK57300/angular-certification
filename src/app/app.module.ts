@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FormSymbolComponent } from './feature/form-symbol/form-symbol.component';
-import { StockSymbolService } from './core/services/stock-symbol.service';
 import { ApiService } from './core/data-services/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ListViewComponent } from './feature/list-view/list-view.component';
@@ -31,12 +30,7 @@ import { DetailViewComponent } from './feature/detail-view/detail-view.component
     GlobalViewComponent,
     DetailViewComponent,
   ],
-  providers: [
-    StockSymbolService,
-    ApiService,
-    StockService,
-    StockDetailsService,
-  ],
+  providers: [ApiService, StockService, StockDetailsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

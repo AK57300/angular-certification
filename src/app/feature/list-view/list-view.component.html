@@ -1,9 +1,8 @@
-<div
-  class="d-flex justify-content-around flex-wrap"
->
-  <ng-container *ngFor="let stock of stocks$ | async">
+<div class="d-flex justify-content-around flex-wrap">
+  <ng-container *ngFor="let stock of listStocks">
     <app-card-view
-      *ngIf="stock | async as stockDetails"
+      (deleteEventEmitter)="deleteEvent($event)"
+      *ngIf="stock.details | async as stockDetails"
       [stock]="stockDetails"
     ></app-card-view>
   </ng-container>

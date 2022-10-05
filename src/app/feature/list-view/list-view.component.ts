@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+Output,
+} from '@angular/core';
 import { filter, forkJoin, map, merge, of, shareReplay, switchMap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import {
-  IStock,
-  StockSymbolService,
-} from '../../core/services/stock-symbol.service';
 import { StockService } from '../../core/services/stock.service';
 
 @Component({
@@ -13,33 +16,14 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./list-view.component.css'],
 })
 export class ListViewComponent implements OnInit {
-  stocks$: Observable<any>;
-  constructor(
-    public readonly stockService: StockService,
-    public readonly stockSymbolService: StockSymbolService
-  ) {}
+  @Input() listStocks;
+  @Output() deleteEventEmitter = new EventEmitter<string>;
 
-  ngOnInit() {
-    let previousCardList = [];
-    const getStockFromLocalStorage = of(
-      JSON.parse(localStorage.getItem('symbol')) || []
-    );
+  constructor() {}
 
-    const getStockWhenAdded = this.stockService.stock
-      .asObservable()
-      .pipe(filter((symbol) => Boolean(symbol)));
+  ngOnInit() {}
 
-    this.stocks$ = merge(getStockFromLocalStorage, getStockWhenAdded).pipe(
-      map((symbol: string | string[]) => {
-        if (Array.isArray(symbol)) {
-          previousCardList = symbol.map((symbol) =>
-            this.stockSymbolService.getDetails(symbol)
-          );
-          return previousCardList;
-        }
-        previousCardList.push(this.stockSymbolService.getDetails(symbol));
-        return previousCardList;
-      })
-    );
+  deleteEvent(event: string) {
+    this.deleteEventEmitter.emit(event);
   }
 }
