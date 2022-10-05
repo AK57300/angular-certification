@@ -4,6 +4,7 @@ import { StockService } from './stock.service';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 
 export interface IStock {
+  symbol: string;
   name: string;
   changeToday: string;
   openingPrice: string;
@@ -24,7 +25,7 @@ export class StockSymbolService {
   ) {}
 
   sendSymbolToLocalStorage(formValue: Partial<{ symbolStock: string }>): void {
-    let tab: string[] = JSON.parse(localStorage.getItem('symbol')) || [];
+    let tab: string[] = this.stockService.stock.getValue() || [];
     tab.push(formValue['symbolStock']);
     localStorage.setItem('symbol', JSON.stringify(tab));
     this.stockService.stock.next(tab);
@@ -48,6 +49,8 @@ export class StockSymbolService {
       resultTwo: this.getSymbol(symbol),
     }).subscribe((data) => {
       this.newStock.next({
+        symbol: data.resultTwo.result.find((sym) => sym.symbol == symbol)
+          .symbol,
         name: data.resultTwo.result.find((sym) => sym.symbol == symbol)
           .description,
         changeToday: data.resultOne.d,

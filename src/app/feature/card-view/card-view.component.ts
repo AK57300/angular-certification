@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StockSymbolService } from '../../core/services/stock-symbol.service';
 import { StockService } from '../../core/services/stock.service';
 
 @Component({
@@ -18,22 +17,8 @@ export class CardViewComponent implements OnInit {
   constructor(private readonly stockService: StockService) {}
 
   ngOnInit() {
-    console.log(this.symbol);
-    this.name = this.symbol;
-    /*this.stockSymbolService.getQuote(this.symbol).subscribe((quote) => {
-      this.changeTodayValue = quote.c;
-      this.openingPrice = quote.o;
-      this.currentPrice = quote.pc;
-      this.highPrice = quote.h;
-    });
-
-    this.stockSymbolService.getSymbol(this.symbol).subscribe((quote) => {
-      this.name = quote.result[0].description;
-    });*/
-  }
-
-  clickBtn() {
-    console.log(this.name);
+    //console.log(this.symbol);
+    //this.name = this.symbol;
   }
 
   deleteStock(id: string) {

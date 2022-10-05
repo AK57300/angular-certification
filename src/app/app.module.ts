@@ -10,14 +10,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListViewComponent } from './feature/list-view/list-view.component';
 import { CardViewComponent } from './feature/card-view/card-view.component';
 import { StockService } from './core/services/stock.service';
+import { AppRoutingModule } from './app-routing.module';
+import { GlobalViewComponent } from './feature/global-view/global-view.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+  ],
   declarations: [
     AppComponent,
     FormSymbolComponent,
     ListViewComponent,
     CardViewComponent,
+    GlobalViewComponent,
   ],
   providers: [StockSymbolService, ApiService, StockService],
   bootstrap: [AppComponent],
