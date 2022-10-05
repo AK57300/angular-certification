@@ -1,0 +1,9 @@
+.arrowUp::after {
+  content: '\2191';
+  color: green;
+}
+
+.arrowDown::after {
+  content: '\2193';
+  color: red;
+}

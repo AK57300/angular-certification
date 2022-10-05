@@ -5,8 +5,8 @@ import { StockDetailsService } from '../../core/services/stock-details.service';
 
 export interface StockDetail {
   date: string;
-  change: string;
-  mspr: string;
+  change: number;
+  mspr: number;
 }
 
 @Component({
@@ -27,9 +27,9 @@ export class DetailViewComponent implements OnInit {
   ngOnInit() {
     this.symbol = this.route.snapshot.params.symbol;
     this.stocks = [
-      { date: 'Mai 2022', change: '1023', mspr: '201' },
-      { date: 'Juin 2022', change: '1025', mspr: '221' },
-      { date: 'Juillet 2022', change: '1028', mspr: '211' },
+      { date: 'Mai 2022', change: 1023, mspr: 201 },
+      { date: 'Juin 2022', change: -1025, mspr: 221 },
+      { date: 'Juillet 2022', change: 1028, mspr: 211 },
     ];
     //this.name.next(this.getName(this.symbol));
     //this.getName(this.symbol);

@@ -1,19 +1,10 @@
-<div *ngIf="stockSymbolService.newStock | async as symb; else loading">
-  symbol: {{ symb.symbol }} nom: {{ symb.name }}
-  changeToday:
-  {{ symb.changeToday }}
-  openingPrice: {{ symb.openingPrice }}
-  currentPrice:
-  {{ symb.currentPrice }}
-  highPrice: {{ symb.highPrice }}
-</div>
-
 <div class="d-flex justify-content-around flex-wrap">
-  <ng-container *ngFor="let stock of stockService.stock | async as stocks">
-    <app-card-view [symbol]="stock"></app-card-view>
+  <ng-container *ngFor="let stock of stocks$ | async">
+    <app-card-view
+      *ngIf="stock | async as stockDetails"
+      [symbol]="stockDetails"
+    ></app-card-view>
   </ng-container>
 </div>
-
-<div>{{ stocks | async }}</div>
 
 <ng-template #loading>Chargement</ng-template>

@@ -44,22 +44,9 @@ export class StockSymbolService {
   }
 
   getDetails(symbol: string) {
-    forkJoin({
+    return forkJoin({
       resultOne: this.getQuote(symbol),
       resultTwo: this.getSymbol(symbol),
-    }).subscribe((data) => {
-      this.newStock.next({
-        symbol: data.resultTwo.result.find((sym) => sym.symbol == symbol)
-          .symbol,
-        name: data.resultTwo.result.find((sym) => sym.symbol == symbol)
-          .description,
-        changeToday: data.resultOne.d,
-        openingPrice: data.resultOne.o,
-        currentPrice: data.resultOne.c,
-        highPrice: data.resultOne.h,
-      });
-
-      //console.log(this.newStock.getValue());
-    });
+    })
   }
 }

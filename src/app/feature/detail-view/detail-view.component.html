@@ -2,9 +2,13 @@
   <div class="card-body">
     <div class="d-flex justify-content-center">{{ symbol }} Name</div>
   </div>
-  <div *ngFor="let stock of stocks">
-    <div>{{ stock.date }}</div>
-    <div>{{ stock.change }}</div>
+  <div class="d-flex justify-content-around">
+    <div *ngFor="let stock of stocks">
+      <div>{{ stock.date }}</div>
+      <div [ngClass]="stock.change >= 0 ? 'arrowUp' : 'arrowDown'"></div>
+      <div>{{ stock.change }}</div>
+      <div>{{ stock.mspr }}</div>
+    </div>
   </div>
-  <button type="button" class="btn btn-light">Back</button>
+  <button type="button" routerLink=".." class="btn btn-light">Back</button>
 </div>

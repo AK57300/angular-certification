@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import {
   IStock,
@@ -13,7 +13,7 @@ import { StockService } from '../../core/services/stock.service';
   styleUrls: ['./list-view.component.css'],
 })
 export class ListViewComponent implements OnInit {
-  stocks: Observable<any>;
+  stocks$: Observable<any>;
   constructor(
     public readonly stockService: StockService,
     public readonly stockSymbolService: StockSymbolService
@@ -24,9 +24,15 @@ export class ListViewComponent implements OnInit {
     this.stockSymbolService.newStock.subscribe();
     //this.stockSymbolService.getDetails('AAPL');
 
+    this.stocks$ = this.stockService.stock.asObservable().pipe();
+
     this.stockService.stock
       .asObservable()
-      .pipe(map((symbols) => symbols.map((symbol) => this.getDetails(symbol))))
+      .pipe(
+        switchMap((symbols) =>
+          symbols.map((symbol) => this.stockSymbolService.getDetails(symbol))
+        )
+      )
       .subscribe();
 
     /*this.stockSymbolService.newStock.subscribe((value) => {
@@ -35,9 +41,5 @@ export class ListViewComponent implements OnInit {
     //console.log(this.stocks.subscribe((data) => console.log(data)));
 
     //this.stocks.subscribe((data) => console.log(data));
-  }
-
-  getDetails(symbol: string) {
-    return this.stockSymbolService.getDetails(symbol);
   }
 }
