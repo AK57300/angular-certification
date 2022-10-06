@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { StockService } from './core/services/stock.service';
 import { AppRoutingModule } from './app-routing.module';
 import { GlobalViewComponent } from './feature/global-view/global-view.component';
-import { StockDetailsService } from './core/services/stock-details.service';
 import { ConvertMonthPipe } from './feature/shared/pipe/convert-month.pipe';
 import { PlusBeforeNumberPipe } from './feature/shared/pipe/plus-before-number.pipe';
 import { FormSymbolComponent } from './feature/global-view/form-symbol/form-symbol.component';
@@ -33,7 +32,7 @@ import { CardViewComponent } from './feature/global-view/list-view/card-view/car
     ConvertMonthPipe,
     PlusBeforeNumberPipe,
   ],
-  providers: [ApiService, StockService, StockDetailsService],
+  providers: [ApiService, StockService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

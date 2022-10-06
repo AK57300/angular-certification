@@ -28,16 +28,11 @@ export class GlobalViewComponent implements OnInit {
             id: symbol,
             details: this.stockService.getDetails(symbol),
           }));
-
           return previousCardList;
         }
-
         const indexSymbol = previousCardList.findIndex((item) => {
           return item.id === symbol.data;
         });
-
-        console.log(indexSymbol);
-
         if (symbol.type === 'add') {
           if (indexSymbol !== -1) {
             return previousCardList;
@@ -55,11 +50,11 @@ export class GlobalViewComponent implements OnInit {
     );
   }
 
-  add(event: string) {
+  add(event: string): void {
     this.stockService.stock.next({ data: event, type: 'add' });
   }
 
-  delete(event: string) {
+  delete(event: string): void {
     this.stockService.stock.next({ data: event, type: 'delete' });
   }
 }

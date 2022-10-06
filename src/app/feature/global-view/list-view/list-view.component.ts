@@ -20,7 +20,7 @@ export class ListViewComponent implements OnInit {
 
   ngOnInit() {}
 
-  deleteEvent(event: string) {
+  deleteEvent(event: string) : void {
     this.deleteEventEmitter.emit(event);
   }
 }

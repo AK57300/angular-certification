@@ -12,6 +12,11 @@ const routes: Routes = [
     component: DetailViewComponent,
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    redirectTo: '/list',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { StockDetailsService } from '../../../core/services/stock-details.service';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { StockService } from '../../../core/services/stock.service';
 import { StockDetail } from '../../shared/model/model';
 
 @Component({
@@ -16,17 +16,17 @@ export class DetailViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private readonly stockDetailsService: StockDetailsService
+    private readonly stockService: StockService
   ) {}
 
   ngOnInit() {
     this.symbol = this.route.snapshot.params.symbol;
     this.getName(this.symbol);
-    this.stocks$ = this.stockDetailsService.getStockDetails(this.symbol);
+    this.stocks$ = this.stockService.getStockDetails(this.symbol);
   }
 
-  getName(symbol: string) {
-    return this.stockDetailsService.getNameStock(symbol).subscribe((data) => {
+  getName(symbol: string): Subscription {
+    return this.stockService.getSymbol(symbol).subscribe((data) => {
       this.name.next(
         data.result.find((elem) => elem.symbol === symbol)?.description
       );

@@ -1,11 +1,13 @@
+import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
+import { BehaviorSubject, of, forkJoin, Subject, Observable, map } from 'rxjs';
 import {
   IAction,
   IDetails,
   IQuote,
   IStock,
   ISymboles,
+  StockDetail,
 } from '../../feature/shared/model/model';
 import { ApiService } from '../data-services/api.service';
 
@@ -52,5 +54,47 @@ export class StockService {
     tab = JSON.parse(localStorage.getItem('symbol'));
     tab = tab.filter((index) => index !== id);
     localStorage.setItem('symbol', JSON.stringify(tab));
+  }
+
+  getStockDetails(symbol: string): Observable<StockDetail[]> {
+    let currentDate = new Date();
+    let dateDebut = new Date(new Date().setMonth(currentDate.getMonth() - 2));
+    let dateFinn = new Date(new Date().setMonth(currentDate.getMonth()));
+    let datee = formatDate(dateDebut, 'yyyy-MM-dd', 'en');
+    let dateFin = formatDate(dateFinn, 'yyyy-MM-dd', 'en');
+    return this.apiService
+      .getStockDetails(
+        this.configUrl +
+          '/stock/insider-sentiment?symbol=' +
+          symbol +
+          '&from=' +
+          datee +
+          '&to=' +
+          dateFin +
+          this.token
+      )
+      .pipe(
+        map((data) => {
+          let newStocks: StockDetail[] = [];
+          for (let i = 0; i < 3; i++) {
+            let currentDate = new Date(
+              new Date().setMonth(new Date().getMonth() - 2 + i)
+            );
+            let newStock: StockDetail;
+            newStock = data.data.find(
+              (data) => data.month === currentDate.getMonth() + 1
+            );
+            newStock = {
+              symbol: newStock?.symbol,
+              year: currentDate.getFullYear(),
+              month: currentDate.getMonth() + 1,
+              change: newStock?.change,
+              mspr: newStock?.mspr,
+            };
+            newStocks.push(newStock);
+          }
+          return newStocks;
+        })
+      );
   }
 }
