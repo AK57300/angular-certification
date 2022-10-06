@@ -11,8 +11,8 @@ import { ConvertMonthPipe } from './feature/shared/pipe/convert-month.pipe';
 import { PlusBeforeNumberPipe } from './feature/shared/pipe/plus-before-number.pipe';
 import { FormSymbolComponent } from './feature/global-view/form-symbol/form-symbol.component';
 import { ListViewComponent } from './feature/global-view/list-view/list-view.component';
-import { DetailViewComponent } from './feature/global-view/detail-view/detail-view.component';
 import { CardViewComponent } from './feature/global-view/list-view/card-view/card-view.component';
+import { DetailViewComponent } from './feature/detail-view/detail-view.component';
 
 @NgModule({
   imports: [
