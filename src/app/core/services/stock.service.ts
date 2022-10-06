@@ -6,7 +6,7 @@ import {
   IQuote,
   IStock,
   ISymboles,
-} from '../../feature/model/model';
+} from '../../feature/shared/model/model';
 import { ApiService } from '../data-services/api.service';
 
 @Injectable()

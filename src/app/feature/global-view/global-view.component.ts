@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, map, merge, Observable, of } from 'rxjs';
 import { StockService } from '../../core/services/stock.service';
-import { IAction, IActionObject, IListStock } from '../model/model';
+import { IAction, IActionObject, IListStock } from '../shared/model/model';
 
 @Component({
   selector: 'app-global-view',

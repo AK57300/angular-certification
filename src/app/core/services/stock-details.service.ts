@@ -1,7 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { filter, forkJoin, map, Observable, of } from 'rxjs';
-import { ISentiment, ISymboles, StockDetail } from '../../feature/model/model';
+import { map, Observable } from 'rxjs';
+import { ISymboles, StockDetail } from '../../feature/shared/model/model';
 import { ApiService } from '../data-services/api.service';
 
 @Injectable()

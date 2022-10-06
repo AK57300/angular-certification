@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { IQuote, IStockDetails, ISymboles } from '../../feature/model/model';
+import {
+  IQuote,
+  IStockDetails,
+  ISymboles,
+} from '../../feature/shared/model/model';
 
 @Injectable()
 export class ApiService {

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StockService } from '../../core/services/stock.service';
-import { StockSymbol } from '../model/stock-symbol';
+import { StockSymbol } from '../shared/model/stock-symbol';
 
 @Component({
   selector: 'app-form-symbol',
@@ -35,6 +35,5 @@ export class FormSymbolComponent implements OnInit {
     const formValue = this.stockForm.value;
     this.stockService.sendSymbolToLocalStorage(formValue);
     this.addEventEmitter.emit(formValue['symbolStock']);
-    //event emitter du subject avec add
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { StockDetailsService } from '../../core/services/stock-details.service';
-import { StockDetail } from '../model/model';
+import { StockDetail } from '../shared/model/model';
 
 @Component({
   selector: 'app-detail-view',

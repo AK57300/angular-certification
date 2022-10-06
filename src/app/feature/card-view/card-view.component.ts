@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { StockService } from '../../core/services/stock.service';
-import { IDetails } from '../model/model';
+import { IDetails } from '../shared/model/model';
 
 @Component({
   selector: 'app-card-view',
@@ -34,6 +34,5 @@ export class CardViewComponent implements OnInit {
   deleteStock(id: string) : void {
     this.stockService.deleteStock(id);
     this.deleteEventEmitter.emit(id);
-    //event emitter du subject avec delete
   }
 }

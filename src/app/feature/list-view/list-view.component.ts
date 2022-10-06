@@ -1,12 +1,11 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   OnInit,
 Output,
 } from '@angular/core';
-import { IListStock } from '../model/model';
+import { IListStock } from '../shared/model/model';
 
 @Component({
   selector: 'app-list-view',
