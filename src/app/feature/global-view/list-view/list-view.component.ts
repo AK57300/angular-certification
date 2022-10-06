@@ -5,7 +5,7 @@ import {
   OnInit,
 Output,
 } from '@angular/core';
-import { IListStock } from '../shared/model/model';
+import { IListStock } from '../../shared/model/model';
 
 @Component({
   selector: 'app-list-view',

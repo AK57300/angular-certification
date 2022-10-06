@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DetailViewComponent } from './feature/detail-view/detail-view.component';
 import { RouterModule, Routes } from '@angular/router';
 import { GlobalViewComponent } from './feature/global-view/global-view.component';
+import { DetailViewComponent } from './feature/global-view/detail-view/detail-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/list', pathMatch: 'full' },

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StockService } from '../../core/services/stock.service';
-import { StockSymbol } from '../shared/model/stock-symbol';
+import { StockService } from '../../../core/services/stock.service';
+import { StockSymbol } from '../../shared/model/stock-symbol';
 
 @Component({
   selector: 'app-form-symbol',
