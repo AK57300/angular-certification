@@ -23,7 +23,7 @@ export class CardViewComponent implements OnInit {
     this.symbol = this.stock.symbol;
     this.name = this.stock.resultTwo.result.find(
       (data) => data.symbol === this.symbol
-    ).description;
+    )?.description;
     this.changeTodayValue = this.stock.resultOne.dp;
     this.openingPrice = this.stock.resultOne.o;
     this.currentPrice = this.stock.resultOne.c;

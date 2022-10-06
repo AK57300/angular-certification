@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { StockDetailsService } from '../../core/services/stock-details.service';
 
 export interface StockDetail {
@@ -11,15 +11,20 @@ export interface StockDetail {
   mspr: number;
 }
 
+export interface IStockDetails {
+  data: StockDetail[];
+  symbol: string;
+}
+
 @Component({
   selector: 'app-detail-view',
   templateUrl: './detail-view.component.html',
   styleUrls: ['./detail-view.component.css'],
 })
 export class DetailViewComponent implements OnInit {
-  name: string;
+  name: BehaviorSubject<string> = new BehaviorSubject(null);
   symbol: string;
-  stocks: StockDetail[];
+  stocks$: Observable<StockDetail[]>;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,23 +33,15 @@ export class DetailViewComponent implements OnInit {
 
   ngOnInit() {
     this.symbol = this.route.snapshot.params.symbol;
-    this.getName(this.symbol).subscribe();
-    this.stocks = [
-      { symbol: 'AAPL', year: 2022, month: 3, change: 1023, mspr: 201 },
-      { symbol: 'AAPL', year: 2022, month: 4, change: -1025, mspr: 221 },
-      { symbol: 'AAPL', year: 2022, month: 5, change: 1028, mspr: 211 },
-    ];
-
-    this.stockDetailsService
-      .getStockDetails(this.symbol, '2015-01-01', '2022-03-01')
-      .subscribe(console.log);
-
-    //this.stockDetailsService.getStockDetails();
-    //this.name.next(this.getName(this.symbol));
-    //this.getName(this.symbol);
+    this.getName(this.symbol);
+    this.stocks$ = this.stockDetailsService.getStockDetails(this.symbol);
   }
 
-  getName(symbol: string): Observable<string> {
-    return this.stockDetailsService.getNameStock(symbol);
+  getName(symbol: string) {
+    return this.stockDetailsService.getNameStock(symbol).subscribe((data) => {
+      this.name.next(
+        data.result.find((elem) => elem.symbol === symbol)?.description
+      );
+    });
   }
 }

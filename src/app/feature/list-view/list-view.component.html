@@ -1,6 +1,7 @@
 <div class="d-flex justify-content-around flex-wrap">
   <ng-container *ngFor="let stock of listStocks">
     <app-card-view
+      style="width: 40%"
       (deleteEventEmitter)="deleteEvent($event)"
       *ngIf="stock.details | async as stockDetails; else loading"
       [stock]="stockDetails"
@@ -9,5 +10,8 @@
 </div>
 
 <ng-template #loading>
-  <div class="lds-dual-ring"></div>
+  <div
+    class="lds-dual-ring d-flex justify-content-around flex-wrap"
+    style="width: 40%;"
+  ></div>
 </ng-template>

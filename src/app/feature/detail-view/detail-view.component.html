@@ -1,15 +1,23 @@
 <div class="card">
   <div class="card-body">
-    <div class="d-flex justify-content-center">{{ symbol }} {{ name }}</div>
-  </div>
-  <div class="d-flex justify-content-around">
-    <div *ngFor="let stock of stocks">
-      <div>{{ stock.month | convertMonth }} {{ stock.year }}</div>
-      <div [ngClass]="stock.change >= 0 ? 'arrowUp' : 'arrowDown'"></div>
-      <div>{{ stock.change | plusBeforeNumber }}</div>
-      <div>{{ stock.mspr }}</div>
+    <div class="d-flex justify-content-center">
+      {{ name | async }} ({{ symbol }})
     </div>
   </div>
+  <div class="d-flex justify-content-around" *ngIf="stocks$; else loading">
+    <div *ngFor="let stock of stocks$ | async as stocks">
+      <div>{{ stock.month | convertMonth }} {{ stock.year }}</div>
+      <div *ngIf="stock.symbol !== undefined; else noDataFound">
+        <div [ngClass]="stock.change >= 0 ? 'arrowUp' : 'arrowDown'"></div>
+        <div>{{ stock.change | plusBeforeNumber }}</div>
+        <div>{{ stock.mspr }}</div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>No data found</ng-template>
+
+  <ng-template #noDataFound>No data found</ng-template>
   <button type="button" routerLink="../../list" class="btn btn-light">
     Back
   </button>
