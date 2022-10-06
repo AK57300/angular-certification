@@ -2,19 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, map, Observable, Subject, tap } from 'rxjs';
 import { StockDetailsService } from '../../core/services/stock-details.service';
-
-export interface StockDetail {
-  symbol: string;
-  year: number;
-  month: number;
-  change: number;
-  mspr: number;
-}
-
-export interface IStockDetails {
-  data: StockDetail[];
-  symbol: string;
-}
+import { StockDetail } from '../model/model';
 
 @Component({
   selector: 'app-detail-view',

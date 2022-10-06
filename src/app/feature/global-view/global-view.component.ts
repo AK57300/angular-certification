@@ -1,20 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, map, merge, Observable, of } from 'rxjs';
-import {
-  IAction,
-  IDetails,
-  StockService,
-} from '../../core/services/stock.service';
-
-export interface IListStock {
-  id: string;
-  details: Observable<IDetails>;
-}
-
-export interface IActionObject {
-  data: string;
-  type: string;
-}
+import { StockService } from '../../core/services/stock.service';
+import { IAction, IActionObject, IListStock } from '../model/model';
 
 @Component({
   selector: 'app-global-view',
@@ -22,7 +9,6 @@ export interface IActionObject {
   styleUrls: ['./global-view.component.css'],
 })
 export class GlobalViewComponent implements OnInit {
-  //stocks$: Observable<any>;
   listStocks$: Observable<IListStock[]>;
   constructor(public readonly stockService: StockService) {}
 
@@ -35,7 +21,6 @@ export class GlobalViewComponent implements OnInit {
     const getStockWhenAdded: Observable<IAction> = this.stockService.stock
       .asObservable()
       .pipe(filter((symbol) => Boolean(symbol)));
-    // this.listStocks$ = this.stocks$ = merge(
     this.listStocks$ = merge(getStockFromLocalStorage, getStockWhenAdded).pipe(
       map((symbol: IActionObject | string[]) => {
         if (Array.isArray(symbol)) {

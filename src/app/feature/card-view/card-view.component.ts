@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IDetails, StockService } from '../../core/services/stock.service';
+import { StockService } from '../../core/services/stock.service';
+import { IDetails } from '../model/model';
 
 @Component({
   selector: 'app-card-view',

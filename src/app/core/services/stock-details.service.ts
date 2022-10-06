@@ -1,17 +1,8 @@
 import { formatDate } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { filter, forkJoin, map, Observable, of } from 'rxjs';
-import {
-  IStockDetails,
-  StockDetail,
-} from '../../feature/detail-view/detail-view.component';
+import { ISentiment, ISymboles, StockDetail } from '../../feature/model/model';
 import { ApiService } from '../data-services/api.service';
-import { ISymboles } from './stock.service';
-
-export interface ISentiment {
-  resultOne: ISymboles;
-  resultTwo: StockDetail[];
-}
 
 @Injectable()
 export class StockDetailsService {
@@ -28,11 +19,14 @@ export class StockDetailsService {
 
   getStockDetails(symbol: string): Observable<StockDetail[]> {
     let currentDate = new Date();
-    let dateDebut = new Date(new Date().setMonth(currentDate.getMonth() - 3));
-    let dateFinn = new Date(new Date().setMonth(currentDate.getMonth() - 1));
+    let dateDebut = new Date(new Date().setMonth(currentDate.getMonth() - 2));
+    let dateFinn = new Date(new Date().setMonth(currentDate.getMonth()));
 
     let datee = formatDate(dateDebut, 'yyyy-MM-dd', 'en');
     let dateFin = formatDate(dateFinn, 'yyyy-MM-dd', 'en');
+
+    console.log(datee);
+    console.log(dateFin);
 
     return this.apiService
       .get(
@@ -68,12 +62,5 @@ export class StockDetailsService {
           return newStocks;
         })
       );
-  }
-
-  getSentiment(symbol: string): Observable<ISentiment> {
-    return forkJoin({
-      resultOne: this.getNameStock(symbol),
-      resultTwo: this.getStockDetails(symbol),
-    });
   }
 }

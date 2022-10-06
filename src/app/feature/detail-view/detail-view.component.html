@@ -4,7 +4,7 @@
       {{ name | async }} ({{ symbol }})
     </div>
   </div>
-  <div class="d-flex justify-content-around" *ngIf="stocks$; else loading">
+  <div class="d-flex justify-content-around">
     <div *ngFor="let stock of stocks$ | async as stocks">
       <div>{{ stock.month | convertMonth }} {{ stock.year }}</div>
       <div *ngIf="stock.symbol !== undefined; else noDataFound">
@@ -15,10 +15,13 @@
     </div>
   </div>
 
-  <ng-template #loading>No data found</ng-template>
-
   <ng-template #noDataFound>No data found</ng-template>
-  <button type="button" routerLink="../../list" class="btn btn-light">
+  <button
+    id="backBtn"
+    type="button"
+    routerLink="../../list"
+    class="btn btn-light"
+  >
     Back
   </button>
 </div>

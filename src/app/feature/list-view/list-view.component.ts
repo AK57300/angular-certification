@@ -6,7 +6,7 @@ import {
   OnInit,
 Output,
 } from '@angular/core';
-import { IListStock } from '../global-view/global-view.component';
+import { IListStock } from '../model/model';
 
 @Component({
   selector: 'app-list-view',

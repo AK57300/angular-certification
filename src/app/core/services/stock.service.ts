@@ -1,51 +1,13 @@
-import { $locationShim } from '@angular/common/upgrade';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of, forkJoin, Subject, Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import {
+  IAction,
+  IDetails,
+  IQuote,
+  IStock,
+  ISymboles,
+} from '../../feature/model/model';
 import { ApiService } from '../data-services/api.service';
-
-export interface IStock {
-  symbol: string;
-  name: string;
-  changeToday: string;
-  openingPrice: string;
-  currentPrice: string;
-  highPrice: string;
-}
-
-export interface IAction {
-  data: string;
-  type: string;
-}
-
-export interface IQuote {
-  c: number;
-  d: number;
-  dp: number;
-  h: number;
-  l: number;
-  o: number;
-  pc: number;
-  t: number;
-}
-
-export interface ISymbole {
-  description: string;
-  displaySymbol: string;
-  symbol: string;
-  type: string;
-}
-
-export interface ISymboles {
-  count: number;
-  result: ISymbole[];
-}
-
-export interface IDetails {
-  symbol: string;
-  resultOne: IQuote;
-  resultTwo: ISymboles;
-}
 
 @Injectable()
 export class StockService {
