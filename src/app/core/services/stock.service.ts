@@ -25,17 +25,16 @@ export class StockService {
     tab = JSON.parse(localStorage.getItem('symbol'));
     tab.push(formValue['symbolStock']);
     localStorage.setItem('symbol', JSON.stringify(tab));
-    //this.stock.next({ data: formValue['symbolStock'], type: '' });
   }
 
   getQuote(symbol: string): Observable<IQuote> {
-    return this.apiService.get(
+    return this.apiService.getQuote(
       this.configUrl + 'quote?symbol=' + symbol + this.token
     );
   }
 
   getSymbol(symbol: string): Observable<ISymboles> {
-    return this.apiService.get(
+    return this.apiService.getSymbole(
       this.configUrl + 'search?q=' + symbol + this.token
     );
   }

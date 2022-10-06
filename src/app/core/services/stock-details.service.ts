@@ -12,7 +12,7 @@ export class StockDetailsService {
   constructor(private readonly apiService: ApiService) {}
 
   getNameStock(symbol: string): Observable<ISymboles> {
-    return this.apiService.get(
+    return this.apiService.getSymbole(
       this.configUrl + 'search?q=' + symbol + this.token
     );
   }
@@ -29,7 +29,7 @@ export class StockDetailsService {
     console.log(dateFin);
 
     return this.apiService
-      .get(
+      .getStockDetails(
         this.configUrl +
           '/stock/insider-sentiment?symbol=' +
           symbol +
