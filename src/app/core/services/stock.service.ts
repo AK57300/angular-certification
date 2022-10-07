@@ -24,7 +24,7 @@ export class StockService {
 
   sendSymbolToLocalStorage(formValue: Partial<{ symbolStock: string }>): void {
     let tab: string[];
-    tab = JSON.parse(localStorage.getItem('symbol'));
+    tab = JSON.parse(localStorage.getItem('symbol')) || [];
     tab.push(formValue['symbolStock']);
     localStorage.setItem('symbol', JSON.stringify(tab));
   }
